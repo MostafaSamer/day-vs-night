@@ -1,16 +1,11 @@
 import Block from "../block"
+import Ball from "../balls"
 import style from "./index.module.scss"
 import types from "../../types"
 import { useEffect, useState } from "react"
 
-/*
-W_SIZE = 100
-width will be 100 block
-W_SIZE must be able to be divided by NUM_TYPES
-*/
-const W_SIZE = 100
+const W_SIZE = 50
 const H_SIZE = 50
-const NUM_TYPES = 2
 
 // TODO: add configration to see how to divide the frame between blocks
 
@@ -20,12 +15,11 @@ const Frame = () => {
 
     const generateBlocks = () => {
         let tempBlocks = [];
-        const sizeWidth = W_SIZE / NUM_TYPES;
 
         for (let row = 0; row < H_SIZE; row++) {
             let rowBlocks = [];
-            for (let cells = 0; cells < W_SIZE; cells++) {
-                rowBlocks.push(<Block type={cells < sizeWidth ? types.day : types.night} />)
+            for (let cells = 0; cells < W_SIZE * 2; cells++) {
+                rowBlocks.push(<Block type={cells < W_SIZE ? types.day : types.night} />)
             }
             tempBlocks.push(rowBlocks)
         }
@@ -33,7 +27,8 @@ const Frame = () => {
     }
 
     const generateBalls = () => {
-
+        return [1, 2]
+        
     }
 
     useEffect(() => {
@@ -46,8 +41,9 @@ const Frame = () => {
             blocks.length > 0 && blocks.map(col => <div style={{display: "flex"}}>{col}</div>)
         }
         <div className={style.ballsPlayGround}>
-            <div className={style.ball} style={{background: "white"}}></div>
-            <div className={style.ball} style={{background: "black"}}></div>
+            {
+                balls.length > 0 && balls.map(ball => <Ball />)
+            }
         </div>
     </div>
 }
