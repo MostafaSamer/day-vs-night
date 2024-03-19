@@ -16,6 +16,7 @@ const NUM_TYPES = 2
 
 const Frame = () => {
     const [blocks, setBlocks] = useState([]);
+    const [balls, setBalls] = useState([]);
 
     const generateBlocks = () => {
         let tempBlocks = [];
@@ -31,14 +32,23 @@ const Frame = () => {
         return tempBlocks;
     }
 
+    const generateBalls = () => {
+
+    }
+
     useEffect(() => {
         setBlocks(generateBlocks())
+        setBalls(generateBalls())
     }, [])
 
     return <div className={style.frameWrapper} >
         {
             blocks.length > 0 && blocks.map(col => <div style={{display: "flex"}}>{col}</div>)
         }
+        <div className={style.ballsPlayGround}>
+            <div className={style.ball} style={{background: "white"}}></div>
+            <div className={style.ball} style={{background: "black"}}></div>
+        </div>
     </div>
 }
 
